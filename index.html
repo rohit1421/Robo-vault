@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RoboVault - Innovation Lab</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <h1 class="logo" onclick="scrollToSection('home')">RoboVault</h1>
+      <div class="right-icons">
+        <div class="notification-icon" onclick="toggleNotification()">🔔 <span class="notif-badge" id="notif-badge">1</span></div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <nav id="nav-menu" class="dropdown-menu">
+          <ul>
+            <li><a href="#home">🏠 Home</a></li>
+            <li><a href="#about">ℹ️ About</a></li>
+            <li><a href="#services">🛠️ Services</a></li>
+            <li><a href="#contact">📞 Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Empowering Innovation Through Robotics</h2>
+      <p>Welcome to RoboVault Innovation Lab - where robotics meets real-world application.</p>
+      <a href="#services" class="btn-primary">Explore Lab</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About RoboVault</h2>
+      <p>RoboVault is a cutting-edge innovation lab focused on hands-on learning in robotics, AI, and embedded technologies. We enable learners to build real-world systems that shape tomorrow.</p>
+      <img src="about.jpg" alt="About RoboVault" class="responsive-img">
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section light-bg">
+    <div class="container">
+      <h2>Lab Products & Services</h2>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <h3>🤖 Robotics Kits</h3>
+          <p>Comprehensive kits including sensors, microcontrollers, and mechanical parts.</p>
+          <ul>
+            <li>🔌 Includes sensors, motors, and programmable boards</li>
+            <li>📦 Ideal for educational and prototyping use</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>📘 Robotics Lab Journey</h3>
+          <ul>
+            <li>🔍 Phase 1: Semiconductor & Electronics Foundations</li>
+            <li>⚙️ Phase 2: Embedded C & Microcontrollers</li>
+            <li>🌐 Phase 3: IoT with Wi-Fi/BT Modules</li>
+            <li>🧠 Phase 4: AI/ML Algorithms for Robotics</li>
+            <li>🕶️ Phase 5: Simulation, AR & VR Robotics</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>💡 Technologies We Cover</h3>
+          <ul>
+            <li>🧠 Artificial Intelligence</li>
+            <li>🔩 Robotics & Mechatronics</li>
+            <li>📡 Internet of Things (IoT)</li>
+            <li>🎮 Augmented & Virtual Reality</li>
+            <li>🔋 Embedded Electronics</li>
+            <li>💻 Programming: C, C++, Python, ROS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact RoboVault</h2>
+      <form class="contact-form" onsubmit="return validateForm()">
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Go to Top Button -->
+  <button onclick="scrollToTop()" id="goTopBtn" title="Go to top">⬆️</button>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2025 RoboVault Innovation Lab</p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+        navMenu.classList.remove("active");
+      }
+    });
+
+    function toggleNotification() {
+      const badge = document.getElementById("notif-badge");
+      badge.style.display = badge.style.display === "none" ? "inline" : "none";
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.onscroll = function () {
+      document.getElementById("goTopBtn").style.display = window.scrollY > 200 ? "block" : "none";
+    }
+
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!isNaN(name.charAt(0))) {
+        alert("Name should not start with a number.");
+        return false;
+      }
+
+      if (name.length < 3) {
+        alert("Name must be at least 3 characters long.");
+        return false;
+      }
+
+      if (!name || !email || !message) {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      alert("Message sent successfully!");
+      return true;
+    }
+  </script>
+
+</body>
+</html>
